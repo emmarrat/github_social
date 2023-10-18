@@ -35,7 +35,7 @@ usersRouter.get('/github-login', async (req, res, next) => {
         //     return res.status(401).send({error: 'No access token!'});
         // }
 
-        const response = await axios.get(`https://api.github.com/user`, {
+        const response = await axios.get(`${GITHUB_API_URL}/user`, {
             headers: {
                 Authorization: `Bearer ${tokenData.access_token}`,
             },

@@ -1,7 +1,8 @@
 import {Container, CssBaseline} from "@mui/material";
 import {Route, Routes} from "react-router-dom";
-import {ROUTER_LINK} from "./constants.ts";
+import {NAV_LINKS} from "./constants.ts";
 import Home from "./page/Home/Home.tsx";
+import AppToolbar from "./components/UI/AppToolbar/AppToolbar.tsx";
 
 function App() {
 
@@ -9,20 +10,20 @@ function App() {
         <>
             <CssBaseline/>
             <header>
-                Header
+                <AppToolbar/>
             </header>
             <main>
                 <Container>
 
                     <Routes>
                         <Route
-                            path={ROUTER_LINK.home}
+                            path={NAV_LINKS.home}
                             element={
                                 <Home/>
                         }
                         />
                         <Route
-                            path={ROUTER_LINK.login}
+                            path={NAV_LINKS.login}
                             element={
                                 <div>Login</div>
                             }

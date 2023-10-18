@@ -9,12 +9,15 @@ const Home = () => {
     const dispatch = useAppDispatch();
     const user = useAppSelector(selectUser);
 
-    useEffect(()=> {
+console.log(window.location.pathname)
+    useEffect(() => {
         const codeParam = new URLSearchParams(window.location.search).get('code');
-        if(codeParam && user === null) {
-            dispatch(loginWithGithub(codeParam)).unwrap();
+        if (codeParam && user === null) {
+            dispatch(loginWithGithub(codeParam)).unwrap().then(() => {
+                window.history.replaceState({}, document.title,window.location.origin);
+            });
         }
-    },[]);
+    }, []);
 
     return (
         <div>
