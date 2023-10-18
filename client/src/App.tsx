@@ -4,6 +4,7 @@ import {NAV_LINKS} from "./constants.ts";
 import Home from "./pages/Home/Home.tsx";
 import AppToolbar from "./components/UI/AppToolbar/AppToolbar.tsx";
 import Profile from "./pages/Profile/Profile.tsx";
+import Login from "./pages/Login/Login.tsx";
 
 function App() {
 
@@ -15,25 +16,18 @@ function App() {
             </header>
             <main>
                 <Container>
-
                     <Routes>
                         <Route
                             path={NAV_LINKS.home}
-                            element={
-                                <Home/>
-                        }
+                            element={<Home/>}
                         />
                         <Route
                             path={NAV_LINKS.login}
-                            element={
-                                <div>Login</div>
-                            }
+                            element={<Login/>}
                         />
                         <Route
                             path={NAV_LINKS.profile}
-                            element={
-                             <Profile/>
-                            }
+                            element={<Profile/>}
                         />
 
                     </Routes>
