@@ -12,3 +12,7 @@ export interface User {
     token: string;
     password: string;
 }
+
+export interface GlobalError {
+    error: string;
+}

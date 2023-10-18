@@ -1,6 +1,7 @@
 import {Container, CssBaseline} from "@mui/material";
 import {Route, Routes} from "react-router-dom";
 import {ROUTER_LINK} from "./constants.ts";
+import Home from "./page/Home/Home.tsx";
 
 function App() {
 
@@ -17,8 +18,8 @@ function App() {
                         <Route
                             path={ROUTER_LINK.home}
                             element={
-                                <div>HOME</div>
-                            }
+                                <Home/>
+                        }
                         />
                         <Route
                             path={ROUTER_LINK.login}

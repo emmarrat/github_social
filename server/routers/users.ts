@@ -28,28 +28,34 @@ usersRouter.get('/github-login', async (req, res, next) => {
 
         const tokenData: IAccessToken = responseToken.data;
 
-        if (!tokenData.access_token) {
-            return res.status(401).send({error: 'No access token!'});
-        }
+        console.log('Authorization header:', tokenData.access_token);
 
-        const response = await axios.get(`${GITHUB_API_URL}/user`, {
+
+        // if (!tokenData.access_token) {
+        //     return res.status(401).send({error: 'No access token!'});
+        // }
+
+        const response = await axios.get(`https://api.github.com/user`, {
             headers: {
-                Authorization: tokenData.access_token,
+                Authorization: `Bearer ${tokenData.access_token}`,
             },
         });
-        const {data} = response;
-        const {id, name, login, bio, email, profile_link, avatar_url, company, location} = data;
+        const data = response.data;
+        console.log('Authorization header:', tokenData.access_token);
+        console.log('User data', data);
 
-        let user = await User.findOne({ github_id: id });
+        const {id, name, login, bio, email, html_url, avatar_url, company, location} = data;
+
+        let user = await User.findOne({github_id: id});
 
         if (!user) {
-           user = new User ({
+            user = new User({
                 github_id: id,
                 name,
                 login,
                 bio,
                 email,
-                profile_link,
+                profile_link: html_url,
                 avatar_url,
                 company,
                 location,
@@ -60,7 +66,7 @@ usersRouter.get('/github-login', async (req, res, next) => {
 
         user.token = tokenData.access_token;
         await user.save();
-        return res.send({ message: 'Login with Github successful!', user });
+        return res.send(user);
     } catch (error) {
         next(error);
     }
