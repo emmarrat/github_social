@@ -1,8 +1,8 @@
 import * as crypto from 'crypto';
-import express, {Request, Response} from "express";
+import express from "express";
 import config from "../config";
 import axios from "axios";
-import {IAccessToken, IUser} from "../types";
+import {IAccessToken} from "../types";
 import User from "../models/User";
 import {GITHUB_API_URL, GITHUB_URL} from "../constants";
 
