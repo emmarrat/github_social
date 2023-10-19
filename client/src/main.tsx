@@ -5,7 +5,7 @@ import {Provider} from "react-redux";
 import {PersistGate} from "redux-persist/integration/react";
 import {BrowserRouter} from "react-router-dom";
 import {persistor, store} from "./app/store.ts";
-import {addInterceptors} from "./axiosApi.ts";
+import {addInterceptors} from "./utils/axiosApi.ts";
 import {ThemeProvider} from "@mui/material";
 import theme from "./theme.ts";
 addInterceptors(store);

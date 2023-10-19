@@ -67,8 +67,8 @@ export const usersSlice = createSlice({
             state.loading = false;
             state.globalUsers = users.items;
             const divisor = 5;
-            const totalAvailablePages = Math.floor(users.total_count
-                / divisor);
+            const totalAvailablePages = Math.max(Math.floor(users.total_count / divisor), 1);
+
             state.globalTotal = users.total_count;
             state.globalTotalPageAvailable = totalAvailablePages > 5 ? 5: totalAvailablePages;
         });

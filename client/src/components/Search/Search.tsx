@@ -32,6 +32,12 @@ const Search:React.FC<Props> = ({page}) => {
         fetchData();
     }, [debouncedQuery, page]);
 
+    useEffect(() => {
+        if(query.length === 0) {
+            clearUsers();
+        }
+    },[query])
+
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
     };

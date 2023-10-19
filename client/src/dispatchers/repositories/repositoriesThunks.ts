@@ -1,6 +1,6 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import {GlobalError, RepositoriesList, RepositoryFull} from "../../types";
-import axiosApi from "../../axiosApi.ts";
+import axiosApi from "../../utils/axiosApi.ts";
 import {isAxiosError} from "axios";
 
 export const getUsersRepos = createAsyncThunk<

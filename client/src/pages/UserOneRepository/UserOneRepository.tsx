@@ -2,7 +2,7 @@ import {useEffect} from "react";
 import {useParams} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../app/hooks.ts";
 import LayoutContainer from "../../components/Layout/LayoutContainer.tsx";
-import {CircularProgress, Typography} from "@mui/material";
+import {CircularProgress, Grid, Typography} from "@mui/material";
 import RepositoryCardFull from "../../components/RepositoryCard/RepositoryCardFull.tsx";
 import {selectOneRepo, selectReposLoading} from "../../dispatchers/repositories/repositoriesSlice.ts";
 import {getOneRepo} from "../../dispatchers/repositories/repositoriesThunks.ts";
@@ -22,7 +22,9 @@ const UserOneRepository = () => {
                 repo &&
                 <>
                     <Typography variant="h4" textTransform="uppercase">My repository:</Typography>
+                    <Grid item container justifyContent='center' xs={8}>
                     <RepositoryCardFull repository={repo}/>
+                    </Grid>
                 </>
             }
         </LayoutContainer>
