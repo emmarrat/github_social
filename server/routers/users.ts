@@ -2,7 +2,7 @@ import * as crypto from 'crypto';
 import express from "express";
 import config from "../config";
 import axios from "axios";
-import {IAccessToken, IGlobalUserResult, IGlobalUserSearch, IUserShort} from "../types";
+import {IAccessToken, IGlobalUserResult, IGlobalUserSearch} from "../types";
 import User from "../models/User";
 import {GITHUB_API_URL, GITHUB_URL} from "../constants";
 
