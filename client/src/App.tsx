@@ -8,6 +8,7 @@ import Login from "./pages/Login/Login.tsx";
 import {useAppSelector} from "./app/hooks.ts";
 import {selectUser} from "./dispatchers/users/usersSlice.ts";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute.tsx";
+import UserRepositories from "./pages/UserRepositories/UserRepositories.tsx";
 
 function App() {
     const user = useAppSelector(selectUser);
@@ -34,6 +35,14 @@ function App() {
                             element={
                                 <ProtectedRoute isAllowed={user !== null} returnTo={NAV_LINKS.home}>
                                     <Profile/>
+                                </ProtectedRoute>
+                            }
+                        />
+                        <Route
+                            path={`${NAV_LINKS.repos}/:category`}
+                            element={
+                                <ProtectedRoute isAllowed={user !== null} returnTo={NAV_LINKS.home}>
+                                    <UserRepositories/>
                                 </ProtectedRoute>
                             }
                         />

@@ -5,5 +5,8 @@ export const NAV_LINKS = {
     home: '/',
     login: '/login/',
     profile: '/profile',
-    editProfile: '/edit-profile'
+    editProfile: '/edit-profile',
+    repos: '/repositories'
 }
+
+export const REPOS_CATEGORIES = ['Private', 'Public']

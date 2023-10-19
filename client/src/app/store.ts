@@ -11,6 +11,7 @@ import {
     REHYDRATE,
 } from 'redux-persist/es/constants';
 import {usersReducer} from "../dispatchers/users/usersSlice.ts";
+import {repositoriesReducer} from "../dispatchers/repositories/repositoriesSlice.ts";
 
 
 const usersPersistConfig = {
@@ -21,6 +22,7 @@ const usersPersistConfig = {
 
 const rootReducer = combineReducers({
     users: persistReducer(usersPersistConfig, usersReducer),
+    repositories: repositoriesReducer
 
 });
 

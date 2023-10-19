@@ -19,18 +19,14 @@ const transformData = (data: IRepositoriesApi, isPrivate: boolean): IRepositorie
         topics: item.topics || [],
         private: item.private,
     }));
+    const privateRepos = repos.filter((repo) => repo.private);
 
-    if (isPrivate) {
-        const repo = repos.filter((repo) => repo.private);
-        return {
-            total_count: repo.length,
-            repos: repo,
-        }
-    }
-    return {
-        total_count: data.total_count,
-        repos: repos,
+    return  {
+        total_count: isPrivate ? privateRepos.length : data.total_count,
+        private: isPrivate,
+        repos: isPrivate ? privateRepos : repos,
     };
+
 };
 
 repositoriesRouter.get('/', auth, async (req, res, next) => {

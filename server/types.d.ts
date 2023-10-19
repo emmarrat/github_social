@@ -38,10 +38,11 @@ export interface IRepositoryApi extends IRepository{
 }
 export interface IRepositories {
     total_count: number;
-    repos: IRepository[],
+    repos: IRepository[];
+    private: boolean;
 }
 
 export interface IRepositoriesApi {
     total_count: number;
-    items: IRepositoryApi[]
+    items: IRepositoryApi[];
 }
