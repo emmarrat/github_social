@@ -7,6 +7,7 @@ import {REPOS_CATEGORIES} from "../../constants.ts";
 import {getUsersRepos} from "../../dispatchers/repositories/repositoriesThunks.ts";
 import {selectRepos, selectReposLoading} from "../../dispatchers/repositories/repositoriesSlice.ts";
 import LayoutContainer from "../../components/Layout/LayoutContainer.tsx";
+import RepositoryCard from "../../components/RepositoryCard/RepositoryCard.tsx";
 
 
 const UserRepositories= () => {
@@ -26,8 +27,8 @@ const UserRepositories= () => {
     let content = (
         <>
             {repositories && repositories.repos.map((repo) => (
-                <Grid item xs={12} sm={6} md={9} key={repo.id}>
-                    <p>{repo.name}</p>
+                <Grid item xs={12} md={9} key={repo.id}>
+                   <RepositoryCard repository={repo}/>
                 </Grid>
             ))}
         </>
@@ -36,7 +37,7 @@ const UserRepositories= () => {
     if (fetchLoading) {
         content = (<CircularProgress color="inherit" sx={{mt: 5}}/>)
     }
-    if (repositories?.repos.length === 0 || !repositories) {
+    if (repositories?.repos.length === 0) {
         content = (<Typography variant="h5" mb={4} fontWeight="bold" textAlign="center">No repositories</Typography>)
     }
 

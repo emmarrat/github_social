@@ -9,4 +9,4 @@ export const NAV_LINKS = {
     repos: '/repositories'
 }
 
-export const REPOS_CATEGORIES = ['Private', 'Public']
+export const REPOS_CATEGORIES = ['Public', 'Private']

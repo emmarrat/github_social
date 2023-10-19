@@ -17,13 +17,16 @@ const ProfileCard: React.FC<Props> = ({user}) => {
     return (
         <Card sx={{width: 400}}>
             <CardHeader
+                color="primary"
                 avatar={
                     user.avatar_url ?
                         <Avatar alt={`${user.name} profile picture`} src={user.avatar_url}
                                 sx={{width: 76, height: 76}}/> :
                         <Avatar><Person2Icon/></Avatar>
                 }
-                title={user.name}
+                title={
+                    <Typography fontWeight="700" color="primary">{user.name}</Typography>
+                }
                 subheader={`@${user.login}`}
             />
             <Divider/>

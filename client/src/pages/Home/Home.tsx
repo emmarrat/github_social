@@ -12,7 +12,7 @@ const Home = () => {
         <LayoutContainer height='60vh'>
             <Typography variant="h4">
                 Hello it's web app which works with
-                <Typography variant="h4" component="span" color="primary">
+                <Typography variant="h4" fontWeight={700} component="span" color="secondary">
                     {' '}  GitHub API
                 </Typography>
             </Typography>
