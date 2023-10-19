@@ -22,7 +22,7 @@ function App() {
                 <AppToolbar/>
             </header>
             <main>
-                <Container>
+                <Container sx={{pb: 10}}>
                     <Routes>
                         <Route
                             path={NAV_LINKS.home}

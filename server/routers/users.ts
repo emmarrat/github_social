@@ -2,19 +2,24 @@ import * as crypto from 'crypto';
 import express from "express";
 import config from "../config";
 import axios from "axios";
-import {IAccessToken, IGlobalUserSearch, IUserShort} from "../types";
+import {IAccessToken, IGlobalUserResult, IGlobalUserSearch, IUserShort} from "../types";
 import User from "../models/User";
 import {GITHUB_API_URL, GITHUB_URL} from "../constants";
 
 const usersRouter = express.Router();
 
-const transformUserData = (data: IGlobalUserSearch): IUserShort[] => {
-    return data.items.map((item) => ({
+const transformUserData = (data: IGlobalUserSearch): IGlobalUserResult => {
+    const result = data.items.map((item) => ({
         id: item.id,
         login: item.login,
         avatar_url: item.avatar_url,
         html_url: item.html_url
     }));
+    return  {
+        total_count: data.total_count,
+        items: result,
+    }
+
 };
 usersRouter.get('/github-login', async (req, res, next) => {
     try {
@@ -77,16 +82,15 @@ usersRouter.get('/github-login', async (req, res, next) => {
 usersRouter.get('/global/:name', async (req, res, next) => {
     try {
         const username = req.params.name;
-
+        const page = req.query.page || 1;
 
         const responseToken = await axios.get(
-            `${GITHUB_API_URL}/search/users?q=${username}`
-
+            `${GITHUB_API_URL}/search/users?q=${username}&per_page=5&page=${page}`
         );
 
         const data: IGlobalUserSearch = responseToken.data;
 
-        const users =transformUserData(data)
+        const users = transformUserData(data)
         return res.send(users);
     } catch (error) {
         next(error);

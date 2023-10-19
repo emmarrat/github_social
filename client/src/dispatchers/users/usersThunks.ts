@@ -1,5 +1,5 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import {GlobalError, User, UserShort} from "../../types";
+import {GlobalError, User, UserGlobalList} from "../../types";
 import axiosApi from "../../axiosApi.ts";
 import {isAxiosError} from "axios";
 
@@ -21,15 +21,13 @@ export const loginWithGithub = createAsyncThunk<
 });
 
 export const findThirdUser = createAsyncThunk<
-    UserShort[],
-    string,
+    UserGlobalList,
+    { name: string, page: string},
     { rejectValue: GlobalError }
 >(
-    'users/findThirdUser', async (name: string, {rejectWithValue}) => {
+    'users/findThirdUser', async (data, {rejectWithValue}) => {
         try {
-
-            const response = await axiosApi.get(`/users/global/${name}`);
-            console.log(response.data)
+            const response = await axiosApi.get(`/users/global/${data.name}?page=${data.page}`);
             return response.data;
         } catch (e) {
             if (isAxiosError(e) && e.response && e.response.status === 400) {

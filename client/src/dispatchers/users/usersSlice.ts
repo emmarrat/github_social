@@ -6,6 +6,8 @@ import {findThirdUser, loginWithGithub} from "./usersThunks.ts";
 interface UsersState {
     user: User | null;
     globalUsers: UserShort[];
+    globalUserPage: number;
+    globalTotal: number;
     loading: boolean;
     authError: GlobalError | null;
 }
@@ -13,6 +15,8 @@ interface UsersState {
 const initialState: UsersState = {
     user: null,
     globalUsers: [],
+    globalUserPage: 1,
+    globalTotal: 0,
     loading: false,
     authError: null,
 };
@@ -26,6 +30,19 @@ export const usersSlice = createSlice({
         },
         clearGlobalUsers: (state) => {
             state.globalUsers = [];
+        },
+        pageUp: (state) => {
+            if(state.globalUserPage < 5) {
+                state.globalUserPage += 1;
+            }
+        },
+        pageDown: (state) => {
+            if(state.globalUserPage > 0) {
+                state.globalUserPage -= 1;
+            }
+        },
+        pageOne: (state) => {
+            state.globalUserPage = 1;
         }
     },
     extraReducers: (builder) => {
@@ -46,7 +63,8 @@ export const usersSlice = createSlice({
         });
         builder.addCase(findThirdUser.fulfilled, (state, { payload: users }) => {
             state.loading = false;
-            state.globalUsers = users;
+            state.globalUsers = users.items;
+            state.globalTotal = users.total_count;
         });
         builder.addCase(findThirdUser.rejected, (state, { payload: error }) => {
             state.loading = false;
@@ -57,8 +75,10 @@ export const usersSlice = createSlice({
 });
 
 export const usersReducer = usersSlice.reducer;
-export const {unsetUser, clearGlobalUsers} = usersSlice.actions;
+export const {unsetUser, clearGlobalUsers, pageUp, pageOne, pageDown} = usersSlice.actions;
 export const selectUser = (state: RootState) => state.users.user;
 export const selectGlobalUsers = (state: RootState) => state.users.globalUsers;
+export const selectGlobalUserPage = (state:RootState) => state.users.globalUserPage;
+export const selectGlobalTotal = (state:RootState) => state.users.globalTotal;
 export const selectAuthLoading = (state: RootState) =>
     state.users.loading;

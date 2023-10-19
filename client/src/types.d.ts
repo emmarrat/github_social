@@ -20,6 +20,11 @@ export interface UserShort {
     html_url: string;
 }
 
+export interface UserGlobalList {
+    total_count: number;
+    items: UserShort[];
+}
+
 export interface GlobalError {
     error: string;
 }

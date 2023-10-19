@@ -16,6 +16,10 @@ export interface IGlobalUserSearch {
     items: IUserShort[];
     total_count: number;
 }
+
+export interface IGlobalUserResult extends IGlobalUserSearch{
+    items: IUserShort[]
+}
 export interface IUserShort {
     id: number;
     login: string;
