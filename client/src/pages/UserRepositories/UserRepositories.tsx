@@ -6,6 +6,7 @@ import CategoriesList from "../../components/CategoriesList/CategoriesList.tsx";
 import {REPOS_CATEGORIES} from "../../constants.ts";
 import {getUsersRepos} from "../../dispatchers/repositories/repositoriesThunks.ts";
 import {selectRepos, selectReposLoading} from "../../dispatchers/repositories/repositoriesSlice.ts";
+import LayoutContainer from "../../components/Layout/LayoutContainer.tsx";
 
 
 const UserRepositories= () => {
@@ -40,8 +41,9 @@ const UserRepositories= () => {
     }
 
     return (
-        <Grid container justifyContent="space-between">
-            <Grid item container xs={12} md={3}>
+        <LayoutContainer gap={3}>
+            <Grid item container justifyContent="center" xs={12} sx={{
+            }}>
                 <CategoriesList categories={REPOS_CATEGORIES}/>
             </Grid>
             <Grid
@@ -51,11 +53,11 @@ const UserRepositories= () => {
                 flexWrap="wrap"
                 justifyContent="center"
                 spacing={3}
-                xs={12} md={9}
+                xs={12}
             >
                 {content}
             </Grid>
-        </Grid>
+        </LayoutContainer>
     );
 }
 

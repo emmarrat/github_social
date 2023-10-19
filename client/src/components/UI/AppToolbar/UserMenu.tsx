@@ -45,6 +45,7 @@ const UserMenu: React.FC<Props> = ({ user }) => {
               sx={{ mt: 1 }}
           >
               <MenuItem component={NavLink} to={NAV_LINKS.profile}>My profile</MenuItem>
+              <MenuItem component={NavLink} to={`${NAV_LINKS.repos}/Public`}>My repositories</MenuItem>
               <MenuItem onClick={handleLogout}>Logout</MenuItem>
           </Menu>
       </>

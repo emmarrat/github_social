@@ -1,43 +1,34 @@
 import React from 'react';
-import {List, ListItem, ListItemButton, ListItemIcon, ListItemText} from "@mui/material";
-import {NavLink as CategoryLink} from "react-router-dom";
-import LabelIcon from "@mui/icons-material/Label";
+import {Box, Button} from "@mui/material";
+import {NavLink as CategoryLink, useParams} from "react-router-dom";
 
 interface Props {
     categories: string[]
 }
 
 const CategoriesList: React.FC<Props> = ({categories}) => {
-    return (
-        <List sx={{backgroundColor: 'background.paper'}}>
-            <ListItemButton component={CategoryLink} to="/" sx={{color: 'inherit'}}>
-                <ListItem>
-                    <ListItemIcon>
-                        <LabelIcon/>
-                    </ListItemIcon>
-                    <ListItemText
-                        primary="All"
-                    ></ListItemText>
-                </ListItem>
-            </ListItemButton>
-            {categories.map((category) => (
-                <ListItemButton
-                    component={CategoryLink}
-                    to={`/repositories/${category}`}
-                    sx={{color: 'inherit'}}
-                    key={category}>
-                    <ListItem>
-                        <ListItemIcon>
-                            <LabelIcon/>
-                        </ListItemIcon>
-                        <ListItemText
-                            primary={category}
-                        ></ListItemText>
-                    </ListItem>
-                </ListItemButton>
-            ))}
+    const {category} = useParams() as { category: string };
 
-        </List>
+    return (
+        <Box sx={{
+           display: 'flex',
+            gap: 2
+        }}>
+            {categories.map((categ) => (
+                <Button
+                    variant="contained"
+                    component={CategoryLink}
+                    to={`/repositories/${categ}`}
+                    color={categ === category ? 'primary' : 'inherit'}
+                    sx={{
+                        padding: '6px 30px'
+                    }}
+                    key={categ}
+                >
+                    {categ}
+                </Button>
+            ))}
+        </Box>
 
     );
 };
