@@ -4,7 +4,7 @@ import {User} from "../../../types";
 import noAvatar from '../../../assets/images/noAvatar.jpg'
 import {useAppDispatch} from "../../../app/hooks.ts";
 import {unsetUser} from "../../../dispatchers/users/usersSlice.ts";
-import {NAV_LINKS} from "../../../constants.ts";
+import {NAV_LINKS} from "../../../utils/constants.ts";
 import {NavLink} from "react-router-dom";
 
 interface Props {

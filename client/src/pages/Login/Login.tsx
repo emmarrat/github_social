@@ -1,6 +1,6 @@
 import LayoutContainer from "../../components/Layout/LayoutContainer.tsx";
 import {Button, Link, Typography} from "@mui/material";
-import {GITHUB_CLIENT_ID, NAV_LINKS} from "../../constants.ts";
+import {GITHUB_CLIENT_ID, NAV_LINKS} from "../../utils/constants.ts";
 import GitHubIcon from '@mui/icons-material/GitHub';
 import {useAppDispatch, useAppSelector} from "../../app/hooks.ts";
 import {selectUser} from "../../dispatchers/users/usersSlice.ts";

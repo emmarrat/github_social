@@ -3,7 +3,7 @@ import {selectUser} from "../../dispatchers/users/usersSlice.ts";
 import {Link as RouterLink} from 'react-router-dom';
 import LayoutContainer from "../../components/Layout/LayoutContainer.tsx";
 import {Button, Grid, Typography} from "@mui/material";
-import {NAV_LINKS} from "../../constants.ts";
+import {NAV_LINKS} from "../../utils/constants.ts";
 
 const Home = () => {
     const user = useAppSelector(selectUser);

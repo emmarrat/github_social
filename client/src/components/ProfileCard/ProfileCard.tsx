@@ -3,9 +3,10 @@ import {Avatar, Button, Card, CardActions, CardContent, CardHeader, Divider, Lin
 import {User} from "../../types";
 import {Link as RouterLink} from 'react-router-dom';
 import Person2Icon from '@mui/icons-material/Person2';
-import {NAV_LINKS} from "../../constants.ts";
+import {NAV_LINKS} from "../../utils/constants.ts";
 import {useAppSelector} from "../../app/hooks.ts";
 import {selectUser} from "../../dispatchers/users/usersSlice.ts";
+import {BOX_SHADOW} from "../../utils/styles.ts";
 
 interface Props {
     user: User
@@ -15,7 +16,7 @@ interface Props {
 const ProfileCard: React.FC<Props> = ({user}) => {
     const loggedUser = useAppSelector(selectUser);
     return (
-        <Card sx={{width: 400}}>
+        <Card sx={{width: 400, boxShadow: BOX_SHADOW}}>
             <CardHeader
                 color="primary"
                 avatar={

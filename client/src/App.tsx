@@ -1,6 +1,6 @@
 import {Container, CssBaseline} from "@mui/material";
 import {Route, Routes} from "react-router-dom";
-import {NAV_LINKS} from "./constants.ts";
+import {NAV_LINKS} from "./utils/constants.ts";
 import Home from "./pages/Home/Home.tsx";
 import AppToolbar from "./components/UI/AppToolbar/AppToolbar.tsx";
 import Profile from "./pages/Profile/Profile.tsx";
@@ -9,6 +9,7 @@ import {useAppSelector} from "./app/hooks.ts";
 import {selectUser} from "./dispatchers/users/usersSlice.ts";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute.tsx";
 import UserRepositories from "./pages/UserRepositories/UserRepositories.tsx";
+import UserOneRepository from "./pages/UserOneRepository/UserOneRepository.tsx";
 
 function App() {
     const user = useAppSelector(selectUser);
@@ -46,7 +47,14 @@ function App() {
                                 </ProtectedRoute>
                             }
                         />
-
+                        <Route
+                            path={`${NAV_LINKS.oneRepo}/:repoName`}
+                            element={
+                                <ProtectedRoute isAllowed={user !== null} returnTo={NAV_LINKS.home}>
+                                    <UserOneRepository/>
+                                </ProtectedRoute>
+                            }
+                        />
                     </Routes>
                 </Container>
             </main>

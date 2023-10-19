@@ -1,5 +1,5 @@
 import axios, { AxiosHeaders, AxiosRequestConfig } from 'axios';
-import { apiURL } from './constants';
+import { apiURL } from './utils/constants.ts';
 import { Store } from '@reduxjs/toolkit';
 import { RootState } from './app/store';
 

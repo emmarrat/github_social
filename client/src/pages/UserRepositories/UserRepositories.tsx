@@ -3,7 +3,7 @@ import {useParams} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../app/hooks.ts";
 import {CircularProgress, Grid, Typography} from "@mui/material";
 import CategoriesList from "../../components/CategoriesList/CategoriesList.tsx";
-import {REPOS_CATEGORIES} from "../../constants.ts";
+import {REPOS_CATEGORIES} from "../../utils/constants.ts";
 import {getUsersRepos} from "../../dispatchers/repositories/repositoriesThunks.ts";
 import {selectRepos, selectReposLoading} from "../../dispatchers/repositories/repositoriesSlice.ts";
 import LayoutContainer from "../../components/Layout/LayoutContainer.tsx";
@@ -27,7 +27,7 @@ const UserRepositories= () => {
     let content = (
         <>
             {repositories && repositories.repos.map((repo) => (
-                <Grid item xs={12} md={9} key={repo.id}>
+                <Grid item xs={12} md={4} key={repo.id}>
                    <RepositoryCard repository={repo}/>
                 </Grid>
             ))}

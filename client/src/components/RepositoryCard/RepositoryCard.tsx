@@ -1,16 +1,17 @@
-import {Button, Card, CardActions, CardContent, CardHeader, Divider, Link, Typography} from "@mui/material";
+import React from 'react';
 import {Repository} from "../../types";
-import React from "react";
+import {Button, Card, CardActions, CardContent, CardHeader, Divider, Typography} from "@mui/material";
+import {BOX_SHADOW} from "../../utils/styles.ts";
+import {NAV_LINKS} from "../../utils/constants.ts";
+import {Link as RouterLink} from 'react-router-dom';
 
 
 interface Props {
     repository: Repository
 }
-
-const RepositoryCard: React.FC<Props> = ({repository}) => {
+const RepositoryCard:React.FC<Props> = ({repository}) => {
     return (
-        <Card sx={{ boxShadow: '8px 5px 7px 8px #D9D9D9'}}>
-
+        <Card sx={{ boxShadow: BOX_SHADOW}}>
             <CardHeader
                 title={repository.name}
                 subheader={`owner @${repository.owner_login}`}
@@ -18,32 +19,15 @@ const RepositoryCard: React.FC<Props> = ({repository}) => {
             <Divider/>
             <CardContent>
                 <Typography variant="body2" color="primary.main">
-                    <b>Description:</b> {repository.description ? repository.description : 'Were not provided'}
-                </Typography>
-                <Typography variant="body2" color="primary.main">
                     <b>Main language:</b> {repository.language}
-                </Typography>
-                {repository.topics.length > 0 && <Typography variant="body2" color="primary.main">
-                    <b>Topics:</b> {repository.topics.map((topic, i) => (
-                    <Typography component="span" key={i}>
-                        {' '} {topic}
-                    </Typography>
-                ))}
-                </Typography>}
-                <Typography variant="body2" color="primary.main">
-                    <b>Created:</b> {repository.created_at}
                 </Typography>
             </CardContent>
             <CardActions sx={{display: 'flex', justifyContent: 'space-evenly'}}>
                 <Button
-                    component={Link}
-                    href={repository.html_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    fullWidth
-                    variant="outlined"
+                    component={RouterLink}
+                    to={`${NAV_LINKS.oneRepo}/${repository.name}`}
                 >
-                    Open Github
+                    More info
                 </Button>
             </CardActions>
         </Card>
