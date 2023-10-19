@@ -1,19 +1,35 @@
 import {useAppSelector} from "../../app/hooks.ts";
 import {selectUser} from "../../dispatchers/users/usersSlice.ts";
+import {Link as RouterLink} from 'react-router-dom';
+import LayoutContainer from "../../components/Layout/LayoutContainer.tsx";
+import {Button, Grid, Typography} from "@mui/material";
 import {NAV_LINKS} from "../../constants.ts";
-import {Navigate} from "react-router-dom";
 
 const Home = () => {
     const user = useAppSelector(selectUser);
 
-    if (!user) {
-        return <Navigate to={NAV_LINKS.login} />;
-    }
-
     return (
-        <div>
-         Home
-        </div>
+        <LayoutContainer height='60vh'>
+            <Typography variant="h4">
+                Hello it's web app which works with
+                <Typography variant="h4" component="span" color="primary">
+                    {' '}  GitHub API
+                </Typography>
+            </Typography>
+            <Typography variant="h5">
+                {user ? 'You can start from your profile page' : 'Firstly visit login page'}
+            </Typography>
+            <Grid item mt={5}>
+                <Button
+                    variant="outlined"
+                    component={RouterLink}
+                    to={user ? NAV_LINKS.profile : NAV_LINKS.login}
+                    size="large"
+                >
+                    {user ? 'profile' : 'Login'}
+                </Button>
+            </Grid>
+        </LayoutContainer>
     );
 };
 

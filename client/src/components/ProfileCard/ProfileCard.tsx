@@ -15,11 +15,12 @@ interface Props {
 const ProfileCard: React.FC<Props> = ({user}) => {
     const loggedUser = useAppSelector(selectUser);
     return (
-        <Card sx={{maxWidth: 345}}>
+        <Card sx={{width: 400}}>
             <CardHeader
                 avatar={
                     user.avatar_url ?
-                        <Avatar alt={`${user.name} profile picture`} src={user.avatar_url} sx={{ width: 76, height: 76 }}/> :
+                        <Avatar alt={`${user.name} profile picture`} src={user.avatar_url}
+                                sx={{width: 76, height: 76}}/> :
                         <Avatar><Person2Icon/></Avatar>
                 }
                 title={user.name}
@@ -28,19 +29,19 @@ const ProfileCard: React.FC<Props> = ({user}) => {
             <Divider/>
             <CardContent>
                 <Typography variant="body2" color="text.secondary">
-                   <b>Email:</b>  {user.email}
+                    <b>Email:</b> {user.email}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                   <b>Location:</b>  {user.location}
+                    <b>Location:</b> {user.location}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                   <b>Company:</b>  {user.company ? user.company : 'Self employed'}
+                    <b>Company:</b> {user.company ? user.company : 'Self employed'}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                   <b>Bio:</b>  {user.bio}
+                    <b>Bio:</b> {user.bio}
                 </Typography>
             </CardContent>
-            <CardActions disableSpacing>
+            <CardActions sx={{display: 'flex', justifyContent: 'space-evenly'}}>
                 <Button
                     component={Link}
                     href={user.profile_link}
@@ -52,11 +53,11 @@ const ProfileCard: React.FC<Props> = ({user}) => {
 
                 {loggedUser && loggedUser._id === user._id &&
                     <Button
-                    component={RouterLink}
-                    to={`${NAV_LINKS.editProfile}/${user._id}`}
-                >
-                    Edit Profile
-                </Button>}
+                        component={RouterLink}
+                        to={`${NAV_LINKS.editProfile}/${user._id}`}
+                    >
+                        Edit Profile
+                    </Button>}
             </CardActions>
         </Card>
     );
