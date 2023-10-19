@@ -72,6 +72,7 @@ repositoriesRouter.get('/:repoName', auth, async (req, res, next) => {
                 html_url: dataResponse.html_url,
                 created_at: dataResponse.created_at,
                 updated_at: dataResponse.updated_at,
+                profile_link: dataResponse.owner.html_url,
             }
         return res.send(result);
     } catch (e) {

@@ -17,11 +17,11 @@ const UserOneRepository = () => {
     }, [dispatch]);
 
     return (
-        <LayoutContainer gap={3}>
+        <LayoutContainer gap={5}>
             {loading ? <CircularProgress color="inherit" sx={{mt: 5}}/> :
                 repo &&
                 <>
-                    <Typography variant="h5">My repository: {repo.name}</Typography>
+                    <Typography variant="h4" textTransform="uppercase">My repository:</Typography>
                     <RepositoryCardFull repository={repo}/>
                 </>
             }

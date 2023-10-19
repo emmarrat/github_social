@@ -25,12 +25,12 @@ export interface Repository {
     private: boolean;
 }
 export interface RepositoryFull extends Repository{
-
     html_url: string;
     description: string;
     created_at: string;
     updated_at: string;
     topics: string[];
+    profile_link: string;
 }
 
 export interface RepositoriesList {

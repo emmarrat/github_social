@@ -32,11 +32,13 @@ export interface IRepository extends IRepositoryShort {
     created_at: string;
     updated_at: string;
     topics: string[];
+    profile_link: string;
 }
 
 export interface IRepositoryApi extends IRepository{
     owner: {
-        login: string
+        login: string;
+        html_url: string;
     }
 }
 export interface IRepositories {

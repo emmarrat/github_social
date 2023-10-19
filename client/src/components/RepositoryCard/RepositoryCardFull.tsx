@@ -2,6 +2,7 @@ import {Button, Card, CardActions, CardContent, CardHeader, Divider, Link, Typog
 import {RepositoryFull} from "../../types";
 import React from "react";
 import {BOX_SHADOW} from "../../utils/styles.ts";
+import GitHubIcon from "@mui/icons-material/GitHub";
 
 
 interface Props {
@@ -44,7 +45,17 @@ const RepositoryCardFull: React.FC<Props> = ({repository}) => {
                     fullWidth
                     variant="outlined"
                 >
-                    Open Github
+                    <GitHubIcon sx={{mr: 1}}/>  Repository
+                </Button>
+                <Button
+                    component={Link}
+                    href={repository.profile_link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    fullWidth
+                    variant="outlined"
+                >
+                    <GitHubIcon sx={{mr: 1}}/>  Profile
                 </Button>
             </CardActions>
         </Card>
