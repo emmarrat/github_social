@@ -6,7 +6,7 @@ import {IRepositories, IRepositoriesApi, IRepository, IRepositoryApi} from "../t
 
 const repositoriesRouter: Router = express.Router();
 
-const transformData = (data: IRepositoriesApi): IRepositories => {
+const transformData = (data: IRepositoriesApi, isPrivate: boolean): IRepositories => {
     const repos: IRepository[] = data.items.map((item: IRepositoryApi) => ({
         id: item.id,
         name: item.name,
@@ -20,34 +20,42 @@ const transformData = (data: IRepositoriesApi): IRepositories => {
         private: item.private,
     }));
 
+    if (isPrivate) {
+        const repo = repos.filter((repo) => repo.private);
+        return {
+            total_count: repo.length,
+            repos: repo,
+        }
+    }
     return {
         total_count: data.total_count,
-        repos: {
-            public: repos.filter((repo) => !repo.private),
-            private: repos.filter((repo) => repo.private),
-        },
+        repos: repos,
     };
 };
 
 repositoriesRouter.get('/', auth, async (req, res, next) => {
     try {
         const user = (req as RequestWithUser).user;
+        const queryIsPrivate = req.query.isPrivate === 'true';
+
+        const headers = queryIsPrivate
+            ? {Authorization: `Bearer ${user.token}`}
+            : {};
 
         const response = await axios.get(
             `${GITHUB_API_URL}/search/repositories?q=user:${user.login}`, {
-                headers: {
-                    Authorization: `Bearer ${user.token}`,
-                },
+                headers,
             }
         );
 
         const dataResponse: IRepositoriesApi = response.data;
-        const transformedData = transformData(dataResponse);
+        const transformedData = transformData(dataResponse, queryIsPrivate);
 
         return res.send(transformedData);
     } catch (e) {
         return next(e);
     }
 });
+
 
 export default repositoriesRouter;
