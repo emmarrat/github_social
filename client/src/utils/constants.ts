@@ -7,7 +7,8 @@ export const NAV_LINKS = {
     profile: '/profile',
     editProfile: '/edit-profile',
     repos: '/repositories',
-    oneRepo: '/oneRepo'
+    oneRepo: '/oneRepo',
+    searchUsers: '/searchUsers'
 }
 
 export const REPOS_CATEGORIES = ['Public', 'Private']

@@ -24,6 +24,9 @@ export const usersSlice = createSlice({
         unsetUser: (state) => {
             state.user = null;
         },
+        clearGlobalUsers: (state) => {
+            state.globalUsers = [];
+        }
     },
     extraReducers: (builder) => {
         builder.addCase(loginWithGithub.pending, (state) => {
@@ -54,7 +57,7 @@ export const usersSlice = createSlice({
 });
 
 export const usersReducer = usersSlice.reducer;
-export const {unsetUser} = usersSlice.actions;
+export const {unsetUser, clearGlobalUsers} = usersSlice.actions;
 export const selectUser = (state: RootState) => state.users.user;
 export const selectGlobalUsers = (state: RootState) => state.users.globalUsers;
 export const selectAuthLoading = (state: RootState) =>

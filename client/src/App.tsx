@@ -4,12 +4,13 @@ import {NAV_LINKS} from "./utils/constants.ts";
 import Home from "./pages/Home/Home.tsx";
 import AppToolbar from "./components/UI/AppToolbar/AppToolbar.tsx";
 import Profile from "./pages/Profile/Profile.tsx";
-import Login from "./pages/Login/Login.tsx";
+import Login from "./components/Login/Login.tsx";
 import {useAppSelector} from "./app/hooks.ts";
 import {selectUser} from "./dispatchers/users/usersSlice.ts";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute.tsx";
 import UserRepositories from "./pages/UserRepositories/UserRepositories.tsx";
 import UserOneRepository from "./pages/UserOneRepository/UserOneRepository.tsx";
+import SearchUsers from "./pages/SearchUsers/SearchUsers.tsx";
 
 function App() {
     const user = useAppSelector(selectUser);
@@ -54,6 +55,10 @@ function App() {
                                     <UserOneRepository/>
                                 </ProtectedRoute>
                             }
+                        />
+                        <Route
+                            path={NAV_LINKS.searchUsers}
+                            element={<SearchUsers/>}
                         />
                     </Routes>
                 </Container>

@@ -2,7 +2,8 @@ import { useState, FormEvent, useEffect } from "react";
 import { Button, Input } from "@mui/material";
 import {useAppDispatch} from "../../app/hooks.ts";
 import {findThirdUser} from "../../dispatchers/users/usersThunks.ts";
-
+import {clearGlobalUsers} from "../../dispatchers/users/usersSlice.ts";
+import ClearIcon from '@mui/icons-material/Clear';
 const Search = () => {
     const dispatch = useAppDispatch();
     const [query, setQuery] = useState("");
@@ -29,17 +30,23 @@ const Search = () => {
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
-        dispatch(findThirdUser(debouncedQuery))
+    };
+
+    const clearUsers = () => {
+        dispatch(clearGlobalUsers());
+        setQuery('');
+        setDebouncedQuery('');
     };
 
     return (
         <form onSubmit={handleSubmit}>
             <Input
-                placeholder={"Type a username (i.e. burakorkmez)"}
+                placeholder={"Type a username (i.e. emmarrat)"}
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
+                sx={{width: '300px'}}
             />
-            <Button type="submit">Search</Button>
+            <Button type="button" onClick={clearUsers}> <ClearIcon/> Clear</Button>
         </form>
     );
 };

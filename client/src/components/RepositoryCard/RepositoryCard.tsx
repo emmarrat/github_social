@@ -26,6 +26,7 @@ const RepositoryCard:React.FC<Props> = ({repository}) => {
                 <Button
                     component={RouterLink}
                     to={`${NAV_LINKS.oneRepo}/${repository.name}`}
+                    fullWidth
                 >
                     More info
                 </Button>

@@ -4,6 +4,7 @@ import {Link as RouterLink} from 'react-router-dom';
 import LayoutContainer from "../../components/Layout/LayoutContainer.tsx";
 import {Button, Grid, Typography} from "@mui/material";
 import {NAV_LINKS} from "../../utils/constants.ts";
+import Login from "../../components/Login/Login.tsx";
 
 const Home = () => {
     const user = useAppSelector(selectUser);
@@ -16,17 +17,19 @@ const Home = () => {
                 </Typography>
             </Typography>
             <Typography variant="h5">
-                {user ? 'You can start from your profile page' : 'Firstly visit login page'}
+                {user ? 'You can start from your profile page' : 'Firstly try to login :)'}
             </Typography>
             <Grid item mt={5}>
-                <Button
+                {user ? <Button
                     variant="outlined"
                     component={RouterLink}
-                    to={user ? NAV_LINKS.profile : NAV_LINKS.login}
+                    to={NAV_LINKS.profile}
                     size="large"
                 >
-                    {user ? 'profile' : 'Login'}
-                </Button>
+                  Profile
+                </Button> :
+                <Login/>
+                }
             </Grid>
         </LayoutContainer>
     );
