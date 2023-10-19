@@ -17,3 +17,34 @@ export interface IAccessToken {
     scope: string;
     token_type: string;
 }
+
+export interface IRepository {
+    id: number;
+    name: string;
+    owner_login: string;
+    html_url: string;
+    description: string;
+    created_at: string;
+    updated_at: string;
+    language: string;
+    topics: string[];
+    private: boolean;
+}
+
+export interface IRepositoryApi extends IRepository{
+    owner: {
+        login: string
+    }
+}
+export interface IRepositories {
+    total_count: number;
+    repos: {
+        public: IRepository[],
+        private: IRepository[],
+    }
+}
+
+export interface IRepositoriesApi {
+    total_count: number;
+    items: IRepositoryApi[]
+}
