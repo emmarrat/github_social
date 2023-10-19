@@ -2,11 +2,20 @@ import * as crypto from 'crypto';
 import express from "express";
 import config from "../config";
 import axios from "axios";
-import {IAccessToken} from "../types";
+import {IAccessToken, IGlobalUserSearch, IUserShort} from "../types";
 import User from "../models/User";
 import {GITHUB_API_URL, GITHUB_URL} from "../constants";
 
 const usersRouter = express.Router();
+
+const transformUserData = (data: IGlobalUserSearch): IUserShort[] => {
+    return data.items.map((item) => ({
+        id: item.id,
+        login: item.login,
+        avatar_url: item.avatar_url,
+        html_url: item.html_url
+    }));
+};
 usersRouter.get('/github-login', async (req, res, next) => {
     try {
         const queryCode = req.query.code as string;
@@ -61,6 +70,24 @@ usersRouter.get('/github-login', async (req, res, next) => {
         user.token = tokenData.access_token;
         await user.save();
         return res.send(user);
+    } catch (error) {
+        next(error);
+    }
+});
+usersRouter.get('/global/:name', async (req, res, next) => {
+    try {
+        const username = req.params.name;
+
+
+        const responseToken = await axios.get(
+            `${GITHUB_API_URL}/search/users?q=${username}`
+
+        );
+
+        const data: IGlobalUserSearch = responseToken.data;
+
+        const users =transformUserData(data)
+        return res.send(users);
     } catch (error) {
         next(error);
     }

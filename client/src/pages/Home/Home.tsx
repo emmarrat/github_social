@@ -7,7 +7,6 @@ import {NAV_LINKS} from "../../utils/constants.ts";
 
 const Home = () => {
     const user = useAppSelector(selectUser);
-
     return (
         <LayoutContainer height='60vh'>
             <Typography variant="h4">

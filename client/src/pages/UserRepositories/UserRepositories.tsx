@@ -47,6 +47,17 @@ const UserRepositories= () => {
             }}>
                 <CategoriesList categories={REPOS_CATEGORIES}/>
             </Grid>
+            <Grid item container justifyContent="center" xs={12} sx={{
+            }}>
+                <Typography
+                    variant="h5"
+                    mb={4}
+                    fontWeight="bold"
+                    textAlign="center"
+                >
+                   Total repositories: {repositories ? repositories.total_count : 0}
+                </Typography>
+            </Grid>
             <Grid
                 item
                 container

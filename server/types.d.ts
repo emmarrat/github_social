@@ -12,6 +12,17 @@ export interface IUser  {
     password: string;
 }
 
+export interface IGlobalUserSearch {
+    items: IUserShort[];
+    total_count: number;
+}
+export interface IUserShort {
+    id: number;
+    login: string;
+    avatar_url: string;
+    html_url: string;
+}
+
 export interface IAccessToken {
     access_token: string;
     scope: string;
@@ -51,3 +62,4 @@ export interface IRepositoriesApi {
     total_count: number;
     items: IRepositoryApi[];
 }
+

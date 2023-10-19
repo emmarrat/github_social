@@ -13,6 +13,13 @@ export interface User {
     password: string;
 }
 
+export interface UserShort {
+    id: number;
+    login: string;
+    avatar_url: string;
+    html_url: string;
+}
+
 export interface GlobalError {
     error: string;
 }
@@ -38,3 +45,4 @@ export interface RepositoriesList {
     repos: Repository[];
     private: boolean;
 }
+
