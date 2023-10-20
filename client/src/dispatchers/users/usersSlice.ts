@@ -1,7 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { GlobalError, User, UserShort } from '../../types';
 import { RootState } from '../../app/store';
-import { findThirdUser, loginWithGithub } from './usersThunks.ts';
+import {
+  findThirdUser,
+  loginWithGithub,
+  updateUserInfo,
+} from './usersThunks.ts';
 
 interface UsersState {
   user: User | null;
@@ -77,6 +81,18 @@ export const usersSlice = createSlice({
         totalAvailablePages > 5 ? 5 : totalAvailablePages;
     });
     builder.addCase(findThirdUser.rejected, (state, { payload: error }) => {
+      state.loading = false;
+      state.authError = error || null;
+    });
+    builder.addCase(updateUserInfo.pending, (state) => {
+      state.authError = null;
+      state.loading = true;
+    });
+    builder.addCase(updateUserInfo.fulfilled, (state, { payload: user }) => {
+      state.loading = false;
+      state.user = user;
+    });
+    builder.addCase(updateUserInfo.rejected, (state, { payload: error }) => {
       state.loading = false;
       state.authError = error || null;
     });

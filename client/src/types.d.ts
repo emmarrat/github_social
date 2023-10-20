@@ -50,3 +50,10 @@ export interface RepositoriesList {
   repos: Repository[];
   private: boolean;
 }
+
+export interface UserUpdate {
+  name: string;
+  bio: string;
+  company: string;
+  location: string;
+}

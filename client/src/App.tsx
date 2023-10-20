@@ -11,6 +11,7 @@ import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute.tsx';
 import UserRepositories from './pages/UserRepositories/UserRepositories.tsx';
 import UserOneRepository from './pages/UserOneRepository/UserOneRepository.tsx';
 import SearchUsers from './pages/SearchUsers/SearchUsers.tsx';
+import ProfileUpdate from './pages/ProfileUpdate/ProfileUpdate.tsx';
 
 function App() {
   const user = useAppSelector(selectUser);
@@ -34,6 +35,17 @@ function App() {
                   returnTo={NAV_LINKS.home}
                 >
                   <Profile />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path={NAV_LINKS.editProfile}
+              element={
+                <ProtectedRoute
+                  isAllowed={user !== null}
+                  returnTo={NAV_LINKS.home}
+                >
+                  <ProfileUpdate />
                 </ProtectedRoute>
               }
             />

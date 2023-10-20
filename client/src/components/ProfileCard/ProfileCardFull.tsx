@@ -74,10 +74,7 @@ const ProfileCardFull: React.FC<Props> = ({ user }) => {
         </Button>
 
         {loggedUser && loggedUser._id === user._id && (
-          <Button
-            component={RouterLink}
-            to={`${NAV_LINKS.editProfile}/${user._id}`}
-          >
+          <Button component={RouterLink} to={`${NAV_LINKS.editProfile}`}>
             Edit Profile
           </Button>
         )}
