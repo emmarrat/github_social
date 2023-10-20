@@ -1,5 +1,4 @@
 import bcrypt from 'bcrypt';
-import { randomUUID } from 'crypto';
 import { model, Model, Schema } from 'mongoose';
 import { IUser } from '../types';
 
@@ -76,10 +75,6 @@ UserSchema.set('toJSON', {
 
 UserSchema.methods.checkPassword = function (password) {
   return bcrypt.compare(password, this.password);
-};
-
-UserSchema.methods.generateToken = function () {
-  this.token = randomUUID();
 };
 
 const User = model<IUser, UserModel>('User', UserSchema);

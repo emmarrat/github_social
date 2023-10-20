@@ -38,7 +38,7 @@ function App() {
               }
             />
             <Route
-              path={`${NAV_LINKS.repos}/:category`}
+              path={`${NAV_LINKS.repos}/:id`}
               element={
                 <ProtectedRoute
                   isAllowed={user !== null}

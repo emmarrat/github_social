@@ -7,7 +7,7 @@ interface Props {
 }
 
 const CategoriesList: React.FC<Props> = ({ categories }) => {
-  const { category } = useParams() as { category: string };
+  const { id } = useParams() as { id: string };
 
   return (
     <Box
@@ -21,7 +21,7 @@ const CategoriesList: React.FC<Props> = ({ categories }) => {
           variant="contained"
           component={CategoryLink}
           to={`/repositories/${categ}`}
-          color={categ === category ? 'primary' : 'inherit'}
+          color={categ === id ? 'primary' : 'inherit'}
           sx={{
             padding: '6px 30px',
           }}

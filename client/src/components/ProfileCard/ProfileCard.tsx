@@ -11,7 +11,8 @@ import {
 } from '@mui/material';
 import { BOX_SHADOW } from '../../utils/styles.ts';
 import { UserShort } from '../../types';
-import GitHubIcon from '@mui/icons-material/GitHub';
+import { Link as RouterLink } from 'react-router-dom';
+import { NAV_LINKS } from '../../utils/constants.ts';
 
 interface Props {
   user: UserShort;
@@ -44,8 +45,14 @@ const ProfileCard: React.FC<Props> = ({ user }) => {
           rel="noopener noreferrer"
           fullWidth
         >
-          <GitHubIcon sx={{ mr: 1 }} />
-          Open Profile
+          Open Github
+        </Button>
+        <Button
+          component={RouterLink}
+          to={`${NAV_LINKS.repos}/${user.login}`}
+          fullWidth
+        >
+          See Repositories
         </Button>
       </CardActions>
     </Card>

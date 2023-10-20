@@ -1,6 +1,6 @@
 import express, { Router } from 'express';
 import auth, { RequestWithUser } from '../middleware/auth';
-import axios from 'axios';
+import axios, { isAxiosError } from 'axios';
 import { GITHUB_API_URL } from '../constants';
 import {
   IRepositories,
@@ -32,28 +32,42 @@ const transformData = (
   };
 };
 
-repositoriesRouter.get('/', auth, async (req, res, next) => {
+repositoriesRouter.get('/:isPrivate', auth, async (req, res, next) => {
   try {
     const user = (req as RequestWithUser).user;
-    const queryIsPrivate = req.query.isPrivate === 'true';
+    const queryIsPrivate = req.params.isPrivate === 'true';
+    const thirdUser = req.query.user;
 
     const headers = queryIsPrivate
       ? { Authorization: `Bearer ${user.token}` }
       : {};
 
-    const response = await axios.get(
-      `${GITHUB_API_URL}/search/repositories?q=user:${user.login}`,
-      {
-        headers,
-      },
-    );
+    const link = `${GITHUB_API_URL}/search/repositories?q=user:${
+      thirdUser !== undefined ? thirdUser : user.login
+    }`;
+
+    const response = await axios.get(link, {
+      headers,
+    });
 
     const dataResponse: IRepositoriesApi = response.data;
     const transformedData = transformData(dataResponse, queryIsPrivate);
 
     return res.send(transformedData);
-  } catch (e) {
-    return next(e);
+  } catch (error) {
+    if (
+      isAxiosError(error) &&
+      error.response &&
+      error.response.status === 422
+    ) {
+      return res.send({
+        total_count: 0,
+        private: false,
+        repos: [],
+      });
+    }
+
+    return next(error);
   }
 });
 

@@ -5,12 +5,15 @@ import { isAxiosError } from 'axios';
 
 export const getUsersRepos = createAsyncThunk<
   RepositoriesList,
-  string,
+  { isPrivate: string; thirdUser?: string },
   { rejectValue: GlobalError }
->('repositories/getUsersRepos', async (isPrivate, { rejectWithValue }) => {
+>('repositories/getUsersRepos', async (reqData, { rejectWithValue }) => {
   try {
+    console.log('works in thunk', reqData.thirdUser);
     const { data } = await axiosApi.get<RepositoriesList>(
-      `/repos?isPrivate=${isPrivate}`,
+      `/repos/${reqData.isPrivate}${
+        reqData.thirdUser ? `?user=${reqData.thirdUser}` : ''
+      }`,
     );
     return data;
   } catch (e) {
