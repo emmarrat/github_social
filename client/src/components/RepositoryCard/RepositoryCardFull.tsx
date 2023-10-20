@@ -5,6 +5,7 @@ import {
   CardContent,
   CardHeader,
   Divider,
+  Grid,
   Link,
   Typography,
 } from '@mui/material';
@@ -57,26 +58,28 @@ const RepositoryCardFull: React.FC<Props> = ({ repository }) => {
         </Typography>
       </CardContent>
       <CardActions sx={{ display: 'flex', justifyContent: 'space-evenly' }}>
-        <Button
-          component={Link}
-          href={repository.html_url}
-          target="_blank"
-          rel="noopener noreferrer"
-          fullWidth
-          variant="outlined"
-        >
-          <GitHubIcon sx={{ mr: 1 }} /> Repository
-        </Button>
-        <Button
-          component={Link}
-          href={repository.profile_link}
-          target="_blank"
-          rel="noopener noreferrer"
-          fullWidth
-          variant="outlined"
-        >
-          <GitHubIcon sx={{ mr: 1 }} /> Profile
-        </Button>
+        <Grid container justifyContent="space-between" flexWrap="wrap" gap={1}>
+          <Button
+            component={Link}
+            href={repository.html_url}
+            target="_blank"
+            rel="noopener noreferrer"
+            fullWidth
+            variant="outlined"
+          >
+            <GitHubIcon sx={{ mr: 1 }} /> Repository
+          </Button>
+          <Button
+            component={Link}
+            href={repository.profile_link}
+            target="_blank"
+            rel="noopener noreferrer"
+            fullWidth
+            variant="outlined"
+          >
+            <GitHubIcon sx={{ mr: 1 }} /> Profile
+          </Button>
+        </Grid>
       </CardActions>
     </Card>
   );

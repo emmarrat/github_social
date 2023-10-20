@@ -46,7 +46,7 @@ const UserOneRepository = () => {
                 : 'My '}
               repository:
             </Typography>
-            <Grid item container justifyContent="center" xs={8}>
+            <Grid item container justifyContent="center" xs={12} md={8}>
               <RepositoryCardFull repository={repo} />
             </Grid>
           </>

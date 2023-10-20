@@ -112,7 +112,11 @@ const SearchUsers = () => {
       {loading ? (
         <CircularProgress />
       ) : (
-        users.map((user) => <ProfileCard user={user} key={user.id} />)
+        users.map((user) => (
+          <Grid item container xs={12} md={7}>
+            <ProfileCard user={user} key={user.id} />
+          </Grid>
+        ))
       )}
     </LayoutContainer>
   );

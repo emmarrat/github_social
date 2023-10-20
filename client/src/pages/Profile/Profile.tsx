@@ -13,7 +13,11 @@ const Profile = () => {
         <GoBackButton />
       </Grid>
       <Typography variant="h5">My Profile</Typography>
-      {user && <ProfileCardFull user={user} />}
+      {user && (
+        <Grid item container xs={12} md={7}>
+          <ProfileCardFull user={user} />
+        </Grid>
+      )}
     </LayoutContainer>
   );
 };

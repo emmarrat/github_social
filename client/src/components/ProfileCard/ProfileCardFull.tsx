@@ -25,7 +25,7 @@ interface Props {
 const ProfileCardFull: React.FC<Props> = ({ user }) => {
   const loggedUser = useAppSelector(selectUser);
   return (
-    <Card sx={{ width: 400, boxShadow: BOX_SHADOW }}>
+    <Card sx={{ width: '100%', boxShadow: BOX_SHADOW }}>
       <CardHeader
         color="primary"
         avatar={

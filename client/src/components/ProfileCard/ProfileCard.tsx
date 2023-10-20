@@ -19,7 +19,7 @@ interface Props {
 }
 const ProfileCard: React.FC<Props> = ({ user }) => {
   return (
-    <Card sx={{ width: 400, boxShadow: BOX_SHADOW }}>
+    <Card sx={{ minWidth: '270px', width: '100%', boxShadow: BOX_SHADOW }}>
       <CardHeader
         color="primary"
         avatar={
@@ -45,14 +45,14 @@ const ProfileCard: React.FC<Props> = ({ user }) => {
           rel="noopener noreferrer"
           fullWidth
         >
-          Open Github
+          Github
         </Button>
         <Button
           component={RouterLink}
           to={`${NAV_LINKS.repos}/${user.login}`}
           fullWidth
         >
-          See Repositories
+          Repositories
         </Button>
       </CardActions>
     </Card>
