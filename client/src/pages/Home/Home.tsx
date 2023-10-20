@@ -1,7 +1,7 @@
 import { useAppSelector } from '../../app/hooks.ts';
 import { selectUser } from '../../dispatchers/users/usersSlice.ts';
 import { Link as RouterLink } from 'react-router-dom';
-import LayoutContainer from '../../components/Layout/LayoutContainer.tsx';
+import LayoutContainer from '../../components/UI/Layout/LayoutContainer.tsx';
 import { Button, Grid, Typography } from '@mui/material';
 import { NAV_LINKS } from '../../utils/constants.ts';
 import Login from '../../components/Login/Login.tsx';

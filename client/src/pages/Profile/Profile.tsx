@@ -3,7 +3,7 @@ import { selectUser } from '../../dispatchers/users/usersSlice.ts';
 import { Grid, Typography } from '@mui/material';
 import ProfileCardFull from '../../components/ProfileCard/ProfileCardFull.tsx';
 import GoBackButton from '../../components/UI/GoBackButton/GoBackButton.tsx';
-import LayoutContainer from '../../components/Layout/LayoutContainer.tsx';
+import LayoutContainer from '../../components/UI/Layout/LayoutContainer.tsx';
 
 const Profile = () => {
   const user = useAppSelector(selectUser);

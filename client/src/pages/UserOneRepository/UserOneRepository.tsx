@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../app/hooks.ts';
-import LayoutContainer from '../../components/Layout/LayoutContainer.tsx';
+import LayoutContainer from '../../components/UI/Layout/LayoutContainer.tsx';
 import { CircularProgress, Grid, Typography } from '@mui/material';
 import RepositoryCardFull from '../../components/RepositoryCard/RepositoryCardFull.tsx';
 import {

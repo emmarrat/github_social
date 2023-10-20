@@ -12,6 +12,7 @@ import { RepositoryFull } from '../../types';
 import React from 'react';
 import { BOX_SHADOW } from '../../utils/styles.ts';
 import GitHubIcon from '@mui/icons-material/GitHub';
+import dayjs from 'dayjs';
 
 interface Props {
   repository: RepositoryFull;
@@ -47,7 +48,12 @@ const RepositoryCardFull: React.FC<Props> = ({ repository }) => {
           </Typography>
         )}
         <Typography variant="body2" color="primary.main">
-          <b>Created:</b> {repository.created_at}
+          <b>Created:</b>{' '}
+          {dayjs(repository.created_at).format('HH:MM, DD MMMM YYYY')}
+        </Typography>
+        <Typography variant="body2" color="primary.main">
+          <b>Last update:</b>{' '}
+          {dayjs(repository.updated_at).format('HH:MM, DD MMMM YYYY')}
         </Typography>
       </CardContent>
       <CardActions sx={{ display: 'flex', justifyContent: 'space-evenly' }}>

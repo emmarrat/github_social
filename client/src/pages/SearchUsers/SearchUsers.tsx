@@ -1,4 +1,4 @@
-import LayoutContainer from '../../components/Layout/LayoutContainer.tsx';
+import LayoutContainer from '../../components/UI/Layout/LayoutContainer.tsx';
 import {
   Button,
   CircularProgress,

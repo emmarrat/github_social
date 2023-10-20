@@ -9,7 +9,7 @@ import {
   selectRepos,
   selectReposLoading,
 } from '../../dispatchers/repositories/repositoriesSlice.ts';
-import LayoutContainer from '../../components/Layout/LayoutContainer.tsx';
+import LayoutContainer from '../../components/UI/Layout/LayoutContainer.tsx';
 import RepositoryCard from '../../components/RepositoryCard/RepositoryCard.tsx';
 import GoBackButton from '../../components/UI/GoBackButton/GoBackButton.tsx';
 

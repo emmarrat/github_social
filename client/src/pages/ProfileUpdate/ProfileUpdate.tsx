@@ -1,4 +1,4 @@
-import LayoutContainer from '../../components/Layout/LayoutContainer.tsx';
+import LayoutContainer from '../../components/UI/Layout/LayoutContainer.tsx';
 import { Grid } from '@mui/material';
 import GoBackButton from '../../components/UI/GoBackButton/GoBackButton.tsx';
 import ProfileUpdateForm from '../../components/ProfileUpdateForm/ProfileUpdateForm.tsx';
