@@ -4,9 +4,7 @@
   font-weight: 400;
 }
 
-
-
-body, * {
+body,
+* {
   box-sizing: border-box;
 }
-
