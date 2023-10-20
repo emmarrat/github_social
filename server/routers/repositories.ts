@@ -71,20 +71,21 @@ repositoriesRouter.get('/:isPrivate', auth, async (req, res, next) => {
   }
 });
 
-repositoriesRouter.get('/:repoName', auth, async (req, res, next) => {
+repositoriesRouter.get('/one/:repoName', auth, async (req, res, next) => {
   try {
     const repoName = req.params.repoName;
-
     const user = (req as RequestWithUser).user;
+    const thirdUser = req.query.user;
 
-    const response = await axios.get(
-      `${GITHUB_API_URL}/repos/${user.login}/${repoName}`,
-      {
-        headers: { Authorization: `Bearer ${user.token}` },
-      },
-    );
+    const link = `${GITHUB_API_URL}/repos/${
+      thirdUser !== undefined ? thirdUser : user.login
+    }/${repoName}`;
+    const response = await axios.get(link, {
+      headers: { Authorization: `Bearer ${user.token}` },
+    });
 
     const dataResponse: IRepositoryApi = response.data;
+    console.log(dataResponse);
     const result: IRepository = {
       id: dataResponse.id,
       name: dataResponse.name,

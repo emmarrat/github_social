@@ -9,7 +9,6 @@ export const getUsersRepos = createAsyncThunk<
   { rejectValue: GlobalError }
 >('repositories/getUsersRepos', async (reqData, { rejectWithValue }) => {
   try {
-    console.log('works in thunk', reqData.thirdUser);
     const { data } = await axiosApi.get<RepositoriesList>(
       `/repos/${reqData.isPrivate}${
         reqData.thirdUser ? `?user=${reqData.thirdUser}` : ''
@@ -17,7 +16,7 @@ export const getUsersRepos = createAsyncThunk<
     );
     return data;
   } catch (e) {
-    if (isAxiosError(e) && e.response && e.response.status === 400) {
+    if (isAxiosError(e) && e.response) {
       return rejectWithValue(e.response.data as GlobalError);
     }
     throw e;
@@ -26,11 +25,15 @@ export const getUsersRepos = createAsyncThunk<
 
 export const getOneRepo = createAsyncThunk<
   RepositoryFull,
-  string,
+  { repoName: string; thirdUser?: string },
   { rejectValue: GlobalError }
->('repositories/getOneRepo', async (repoName, { rejectWithValue }) => {
+>('repositories/getOneRepo', async (reqData, { rejectWithValue }) => {
   try {
-    const { data } = await axiosApi.get<RepositoryFull>(`/repos/${repoName}`);
+    const { data } = await axiosApi.get<RepositoryFull>(
+      `/repos/one/${reqData.repoName}${
+        reqData.thirdUser ? `?user=${reqData.thirdUser}` : ''
+      }`,
+    );
     return data;
   } catch (e) {
     if (isAxiosError(e) && e.response && e.response.status === 400) {

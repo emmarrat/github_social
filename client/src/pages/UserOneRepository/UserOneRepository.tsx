@@ -9,14 +9,25 @@ import {
   selectReposLoading,
 } from '../../dispatchers/repositories/repositoriesSlice.ts';
 import { getOneRepo } from '../../dispatchers/repositories/repositoriesThunks.ts';
+import GoBackButton from '../../components/UI/GoBackButton/GoBackButton.tsx';
+import { selectUser } from '../../dispatchers/users/usersSlice.ts';
 
 const UserOneRepository = () => {
-  const { repoName } = useParams() as { repoName: string };
+  const { repoName, username } = useParams() as {
+    repoName: string;
+    username: string;
+  };
   const dispatch = useAppDispatch();
   const repo = useAppSelector(selectOneRepo);
   const loading = useAppSelector(selectReposLoading);
+  const loggedUser = useAppSelector(selectUser);
+
   useEffect(() => {
-    dispatch(getOneRepo(repoName));
+    if (loggedUser && username !== loggedUser.login) {
+      dispatch(getOneRepo({ repoName, thirdUser: username }));
+    } else {
+      dispatch(getOneRepo({ repoName }));
+    }
   }, [dispatch, repoName]);
 
   return (
@@ -26,8 +37,14 @@ const UserOneRepository = () => {
       ) : (
         repo && (
           <>
+            <Grid item alignSelf="flex-start">
+              <GoBackButton />
+            </Grid>
             <Typography variant="h4" textTransform="uppercase">
-              My repository:
+              {loggedUser && username !== loggedUser.login
+                ? `${username}'s `
+                : 'My '}
+              repository:
             </Typography>
             <Grid item container justifyContent="center" xs={8}>
               <RepositoryCardFull repository={repo} />

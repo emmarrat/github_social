@@ -49,7 +49,7 @@ function App() {
               }
             />
             <Route
-              path={`${NAV_LINKS.oneRepo}/:repoName`}
+              path={`${NAV_LINKS.oneRepo}/:repoName/:username`}
               element={
                 <ProtectedRoute
                   isAllowed={user !== null}

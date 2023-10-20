@@ -32,7 +32,7 @@ const RepositoryCard: React.FC<Props> = ({ repository }) => {
       <CardActions sx={{ display: 'flex', justifyContent: 'space-evenly' }}>
         <Button
           component={RouterLink}
-          to={`${NAV_LINKS.oneRepo}/${repository.name}`}
+          to={`${NAV_LINKS.oneRepo}/${repository.name}/${repository.owner_login}`}
           fullWidth
         >
           More info

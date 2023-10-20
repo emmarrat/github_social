@@ -11,15 +11,16 @@ import {
 } from '../../dispatchers/repositories/repositoriesSlice.ts';
 import LayoutContainer from '../../components/Layout/LayoutContainer.tsx';
 import RepositoryCard from '../../components/RepositoryCard/RepositoryCard.tsx';
+import GoBackButton from '../../components/UI/GoBackButton/GoBackButton.tsx';
 
 const UserRepositories = () => {
   const { id } = useParams() as { id: string };
   const dispatch = useAppDispatch();
   const repositories = useAppSelector(selectRepos);
   const fetchLoading = useAppSelector(selectReposLoading);
+
   useEffect(() => {
     if (id !== 'Private' && id !== 'Public') {
-      console.log('works ');
       dispatch(getUsersRepos({ isPrivate: 'false', thirdUser: id }));
     } else if (id === 'Private') {
       dispatch(getUsersRepos({ isPrivate: 'true' }));
@@ -52,17 +53,26 @@ const UserRepositories = () => {
 
   return (
     <LayoutContainer gap={3}>
+      <Grid item alignSelf="flex-start">
+        <GoBackButton />
+      </Grid>
       {id === 'Private' || id === 'Public' ? (
         <Grid item container justifyContent="center" xs={12} sx={{}}>
           <CategoriesList categories={REPOS_CATEGORIES} />
         </Grid>
-      ) : null}
-
-      <Grid item container justifyContent="center" xs={12} sx={{}}>
+      ) : (
         <Typography variant="h5" mb={4} fontWeight="bold" textAlign="center">
-          Total repositories: {repositories ? repositories.total_count : 0}
+          {id}'s public repositories
         </Typography>
-      </Grid>
+      )}
+
+      {!fetchLoading && (
+        <Grid item container justifyContent="center" xs={12} sx={{}}>
+          <Typography variant="h5" mb={4} fontWeight="bold" textAlign="center">
+            Total repositories: {repositories ? repositories.total_count : 0}
+          </Typography>
+        </Grid>
+      )}
       <Grid
         item
         container
