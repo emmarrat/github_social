@@ -18,7 +18,7 @@ const run = async () => {
   mongoose.set('strictQuery', false);
   await mongoose.connect(config.db);
   app.listen(port, () => {
-    console.log('We are live on' + port);
+    console.log('We are live on ' + port);
   });
 
   process.on('exit', () => {

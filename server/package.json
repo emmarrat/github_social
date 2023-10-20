@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.ts",
-    "seed": "ts-node fixtures.ts",
     "lint": "eslint --ext .ts --ignore-path .gitignore --ignore-pattern 'node_modules/*' .",
     "format:check": "prettier --check .",
     "format": "prettier --write .",
