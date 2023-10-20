@@ -46,11 +46,11 @@ repositoriesRouter.get('/:isPrivate', auth, async (req, res, next) => {
       thirdUser !== undefined ? thirdUser : user.login
     }`;
 
-    const response = await axios.get(link, {
+    const { data } = await axios.get(link, {
       headers,
     });
 
-    const dataResponse: IRepositoriesApi = response.data;
+    const dataResponse: IRepositoriesApi = data;
     const transformedData = transformData(dataResponse, queryIsPrivate);
 
     return res.send(transformedData);
@@ -85,7 +85,6 @@ repositoriesRouter.get('/one/:repoName', auth, async (req, res, next) => {
     });
 
     const dataResponse: IRepositoryApi = response.data;
-    console.log(dataResponse);
     const result: IRepository = {
       id: dataResponse.id,
       name: dataResponse.name,

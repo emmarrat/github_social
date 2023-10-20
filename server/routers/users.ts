@@ -5,6 +5,7 @@ import axios from 'axios';
 import { IAccessToken, IGlobalUserResult, IGlobalUserSearch } from '../types';
 import User from '../models/User';
 import { GITHUB_API_URL, GITHUB_URL } from '../constants';
+import auth, { RequestWithUser } from '../middleware/auth';
 
 const usersRouter = express.Router();
 
@@ -20,6 +21,7 @@ const transformUserData = (data: IGlobalUserSearch): IGlobalUserResult => {
     items: result,
   };
 };
+
 usersRouter.get('/github-login', async (req, res, next) => {
   try {
     const queryCode = req.query.code as string;
@@ -41,12 +43,11 @@ usersRouter.get('/github-login', async (req, res, next) => {
       return res.status(401).send({ error: 'No access token!' });
     }
 
-    const response = await axios.get(`${GITHUB_API_URL}/user`, {
+    const { data } = await axios.get(`${GITHUB_API_URL}/user`, {
       headers: {
         Authorization: `Bearer ${tokenData.access_token}`,
       },
     });
-    const data = response.data;
     const {
       id,
       name,
@@ -97,6 +98,39 @@ usersRouter.get('/global/:name', async (req, res, next) => {
 
     const users = transformUserData(data);
     return res.send(users);
+  } catch (error) {
+    next(error);
+  }
+});
+
+usersRouter.patch('/', auth, async (req, res, next) => {
+  try {
+    const user = (req as RequestWithUser).user;
+
+    const bodyRequest = {
+      name: req.body.name || user.name,
+      bio: req.body.bio || user.bio,
+      company: req.body.company || user.company,
+      location: req.body.location || user.location,
+    };
+
+    const { data } = await axios.patch(`${GITHUB_API_URL}/user`, bodyRequest, {
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+        Accept: 'application/vnd.github+json',
+      },
+    });
+
+    const { name, bio, company, location } = data;
+
+    user.name = name;
+    user.bio = bio;
+    user.company = company;
+    user.location = location;
+
+    await user.save();
+
+    return res.send(user);
   } catch (error) {
     next(error);
   }
