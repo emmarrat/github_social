@@ -48,7 +48,7 @@ React, React-Router-Dom, Redux-Toolkit, Redux-Persist, Axios, Material UI, Day.j
 ### Если предыдущие условия выполнены, то следуйте пошаговой инструкции
 
 1. Склонируйте репозиторий на свой компьютер: `git clone https://github.com/emmarrat/github_social.git`
-2. Перейдите в директорию server и установите зависимости: `cd server` `npm install`
+2. Перейдите в директорию server и установите зависимости: `cd github_social/server/` `npm install`
 3. В корне директории server создайте файл ".env". В данном файле сохраните ваши коды доступа в следующем формате:
 
    GITHUB_CLIENT_ID={ваш Client ID}
